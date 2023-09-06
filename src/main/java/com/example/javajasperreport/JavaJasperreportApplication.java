@@ -40,14 +40,21 @@ public class JavaJasperreportApplication {
 		try {
 			// create data
 			List<Invoice> list = new ArrayList<Invoice>();
-			list.add(new Invoice(1, "Trucking", "1.00", "0.00000", "0.00"));
+			list.add(new Invoice(1, "Product 1", "1", "200.00", "200.00"));
+			list.add(new Invoice(2, "Product 2", "1", "200.00", "200.00"));
+			list.add(new Invoice(3, "Product 3", "2", "200.00", "400.00"));
+			list.add(new Invoice(4, "Product 4", "3", "200.00", "600.00"));
+			list.add(new Invoice(5, "Product 5", "2", "200.00", "400.00"));
 	
 			//dynamic parameters required for report
 			Map<String, Object> invParams = new HashMap<String, Object>();
-			invParams.put("CompanyName", "RCL LOGISTICS COMPANY LIMITED ( Head Office )");
-			invParams.put("CompanyAddress1", "127/18 PANJATHANI TOWER 14th FLOOR NONSEE ROAD,");
-			invParams.put("CompanyAddress2", "CHONGNONSEE, YANNAWA, BANGKOK 10120");
-			invParams.put("CompanyAddress3", "(TAX ID: 0105544033446) TEL NO. (02) 296-1288 FAX NO. (02) 296-1279");
+			invParams.put("CompanyName", "Company Name");
+			invParams.put("CompanyAddress1", "123 Street Address");
+			invParams.put("CompanyAddress2", "City, State, Zip/Post Code");
+			invParams.put("CompanyPhone", "Phone Number");
+			invParams.put("CompanyEmail", "Email Address");
+			invParams.put("DateInvoice", "Date: 01/01/2020");
+			invParams.put("InvoiceNumber", "Invoice: IN123456789");
 			invParams.put("invoiceData", new JRBeanCollectionDataSource(list));
 			
 			JasperPrint empReport = JasperFillManager.fillReport(
@@ -59,7 +66,7 @@ public class JavaJasperreportApplication {
 			HttpHeaders headers = new HttpHeaders();
 			//set the PDF format
 			headers.setContentType(MediaType.APPLICATION_PDF);
-			headers.setContentDispositionFormData("filename", "employees-details.pdf");
+			headers.setContentDispositionFormData("filename", "invoice.pdf");
 			//create the report in PDF format
 			return new ResponseEntity<byte[]>
 					(JasperExportManager.exportReportToPdf(empReport), headers, HttpStatus.OK);

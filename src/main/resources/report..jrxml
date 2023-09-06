@@ -11,7 +11,7 @@
 	topMargin="20" 
 	bottomMargin="20" 
 >
-	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+	<style name="Table_TH" mode="Opaque" backcolor="#FF0000">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 			<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -29,7 +29,7 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+	<style name="Table_CH" mode="Opaque" backcolor="#FF0000">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 			<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -38,14 +38,16 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="Dataset1" uuid="01ae53ec-87c9-41de-867d-bd79f5d4e77c">
+	<subDataset name="Dataset1">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
 		<field name="id" class="java.lang.Integer"/>
 		<field name="description" class="java.lang.String"/>
-		<sortField name="id"/>
+		<field name="qty" class="java.lang.String"/>
+		<field name="unit" class="java.lang.String"/>
+		<field name="total" class="java.lang.String"/>
 		<variable name="totalEmployees" class="java.lang.Integer" calculation="DistinctCount">
 			<variableExpression><![CDATA[$F{id}]]></variableExpression>
 		</variable>
@@ -53,145 +55,138 @@
 	<parameter name="CompanyName" class="java.lang.String"/>
 	<parameter name="CompanyAddress1" class="java.lang.String"/>
 	<parameter name="CompanyAddress2" class="java.lang.String"/>
-	<parameter name="CompanyAddress3" class="java.lang.String"/>
+	<parameter name="CompanyPhone" class="java.lang.String"/>
+	<parameter name="CompanyEmail" class="java.lang.String"/>
+	<parameter name="DateInvoice" class="java.lang.String"/>
+	<parameter name="InvoiceNumber" class="java.lang.String"/>
 	<parameter name="invoiceData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>
 	<field name="desctiption" class="java.lang.String"/>
+	<field name="qty" class="java.lang.String"/>
+	<field name="unit" class="java.lang.String"/>
+	<field name="total" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="100">
+		<band height="80">
 			<textField>
-				<reportElement x="0" y="0" width="595" height="20"/>
+				<reportElement x="0" y="0" width="277" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$P{CompanyName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="21" width="595" height="20"/>
+				<reportElement x="278" y="0" width="278" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{DateInvoice}]]></textFieldExpression>
+			</textField>
+			
+			<textField>
+				<reportElement x="0" y="16" width="277" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$P{CompanyAddress1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="41" width="595" height="20"/>
+				<reportElement x="278" y="16" width="278" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{InvoiceNumber}]]></textFieldExpression>
+			</textField>
+
+			<textField>
+				<reportElement x="0" y="31" width="277" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$P{CompanyAddress2}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="61" width="595" height="20"/>
+				<reportElement x="0" y="46" width="277" height="15"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$P{CompanyAddress3}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{CompanyPhone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="61" width="277" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{CompanyEmail}]]></textFieldExpression>
 			</textField>
       </band>
 	</title>
 	<pageHeader>
-        <band height="113" splitType="Stretch">
-            <rectangle>
-                <reportElement mode="Opaque" x="315" y="1" width="218" height="96" forecolor="#000000" backcolor="#C7D8ED"/>
-                <graphicElement>
-                    <pen lineColor="#666666"/>
-                </graphicElement>
-            </rectangle>
-            <staticText>
-                <reportElement x="2" y="2" width="98" height="20"/>
-                <textElement>
+        <band height="131" splitType="Stretch">
+			<staticText>
+                <reportElement x="0" y="10" width="555" height="15"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[Payment terms (due on receipt, due in X days)]]></text>
+            </staticText>
+
+			<staticText>
+                <reportElement x="0" y="35" width="277" height="15"/>
+                <textElement markup="styled">
                     <font isBold="true"/>
                 </textElement>
-                <text><![CDATA[Customer Name :]]></text>
+                <text><![CDATA[BILL TO]]></text>
             </staticText>
-            <staticText>
-                <reportElement x="325" y="3" width="93" height="20"/>
-                <textElement>
+			<staticText>
+                <reportElement x="0" y="51" width="277" height="15"/>
+                <textElement />
+                <text><![CDATA[Contact Name]]></text>
+            </staticText>
+			<staticText>
+                <reportElement x="0" y="67" width="277" height="15"/>
+                <textElement />
+                <text><![CDATA[Client Company Name]]></text>
+            </staticText>
+			<staticText>
+                <reportElement x="0" y="83" width="277" height="15"/>
+                <textElement />
+                <text><![CDATA[Address]]></text>
+            </staticText>
+			<staticText>
+                <reportElement x="0" y="99" width="277" height="15"/>
+                <textElement />
+                <text><![CDATA[Phone]]></text>
+            </staticText>
+			<staticText>
+                <reportElement x="0" y="115" width="277" height="15"/>
+                <textElement />
+                <text><![CDATA[Email]]></text>
+            </staticText>
+
+			<staticText>
+                <reportElement x="298" y="35" width="277" height="15"/>
+                <textElement markup="styled">
                     <font isBold="true"/>
                 </textElement>
-                <text><![CDATA[Invoice Number :]]></text>
+                <text><![CDATA[SHIP TO]]></text>
             </staticText>
-            <staticText>
-                <reportElement x="325" y="28" width="93" height="20"/>
-                <textElement>
-                    <font isBold="true"/>
-                </textElement>
-                <text><![CDATA[Invoice Date :]]></text>
+			<staticText>
+                <reportElement x="298" y="51" width="277" height="15"/>
+                <textElement />
+                <text><![CDATA[Name / Dept]]></text>
             </staticText>
-            <staticText>
-                <reportElement x="325" y="52" width="93" height="20"/>
-                <textElement>
-                    <font isBold="true"/>
-                </textElement>
-                <text><![CDATA[Payment Type :]]></text>
+			<staticText>
+                <reportElement x="298" y="67" width="277" height="15"/>
+                <textElement />
+                <text><![CDATA[Client Company Name]]></text>
             </staticText>
-            <staticText>
-                <reportElement x="325" y="76" width="93" height="20"/>
-                <textElement>
-                    <font isBold="true"/>
-                </textElement>
-                <text><![CDATA[PO Number :]]></text>
+			<staticText>
+                <reportElement x="298" y="83" width="277" height="15"/>
+                <textElement />
+                <text><![CDATA[Address]]></text>
             </staticText>
-            <staticText>
-                <reportElement x="2" y="27" width="98" height="20"/>
-                <textElement>
-                    <font isBold="true"/>
-                </textElement>
-                <text><![CDATA[Customer Email :]]></text>
+			<staticText>
+                <reportElement x="298" y="99" width="277" height="15"/>
+                <textElement />
+                <text><![CDATA[Phone]]></text>
             </staticText>
-            <textField>
-                <reportElement x="434" y="52" width="88" height="20"/>
-                <textElement/>
-                <textFieldExpression></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="434" y="76" width="88" height="20"/>
-                <textElement/>
-                <textFieldExpression></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="114" y="27" width="167" height="20"/>
-                <textElement/>
-                <textFieldExpression></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="114" y="2" width="167" height="20"/>
-                <textElement/>
-                <textFieldExpression></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="434" y="3" width="88" height="20"/>
-                <textElement/>
-                <textFieldExpression></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="434" y="28" width="88" height="20"/>
-                <textElement/>
-                <textFieldExpression></textFieldExpression>
-            </textField>
         </band>
     </pageHeader>
-	<!-- <pageHeader>
-		<band height="86" splitType="Stretch">
-			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="86"/>
-				<box padding="0">
-					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textField>
-					<reportElement style="Table_TH" mode="Transparent" x="0" y="32" width="190" height="30" backcolor="#FFFFFF" uuid="15957312-bfcc-43e7-ad7c-8cdb97c4197b"/>
-					<textFieldExpression><![CDATA[$P{CompanyAddress1}]]></textFieldExpression>
-				</textField>
-			</frame>
-		</band>
-	</pageHeader> -->
-	<!-- <detail>
+	<detail>
 		<band height="170" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<componentElement>
-				<reportElement x="0" y="0" width="555" height="170" uuid="58650125-3653-4fa6-9154-b9c084419a71">
+				<reportElement x="0" y="0" width="555" height="170">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -203,42 +198,92 @@
 					<datasetRun subDataset="Dataset1">
 						<dataSourceExpression><![CDATA[$P{invoiceData}]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="100">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
-						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="100" height="30"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[Id]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30">
-							<textField>
-								<reportElement x="0" y="0" width="100" height="30"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="455">
+					<jr:column width="405">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="455" height="30"/>
+								<reportElement x="0" y="0" width="405" height="30"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Description]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="455" height="30"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="50" height="30">
+									<property name="local_mesure_unitheight" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</reportElement>
+								<box padding="5"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[QTY]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30">
+									<property name="local_mesure_unitheight" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</reportElement>
+								<box padding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Unit]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30">
+									<property name="local_mesure_unitheight" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</reportElement>
+								<box padding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30">
+									<property name="local_mesure_unitheight" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</reportElement>
+								<box padding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
 				</jr:table>
 			</componentElement>
 		</band>
-	</detail> -->
+	</detail>
 </jasperReport>

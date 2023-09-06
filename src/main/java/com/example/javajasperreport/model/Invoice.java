@@ -4,15 +4,15 @@ public class Invoice {
     private int id;
 	private String description;
 	private String qty;
-	private String rate;
-	private String amount;
+	private String unit;
+	private String total;
 
-    public Invoice(int id, String description, String qty, String rate, String amount) {
+    public Invoice(int id, String description, String qty, String unit, String total) {
 		this.id = id;
 		this.description = description;
 		this.qty = qty;
-		this.rate = rate;
-		this.amount = amount;
+		this.unit = unit;
+		this.total = total;
 	}
 
     public int getId() {
@@ -39,19 +39,19 @@ public class Invoice {
 		this.qty = qty;
 	}
 
-    public String getRate() {
-		return rate;
+    public String getUnit() {
+		return unit;
 	}
 
-	public void setRate(String rate) {
-		this.rate = rate;
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
-    public String getAmount() {
-		return amount;
+    public String getTotal() {
+		return total;
 	}
 
-	public void setAmount(String amount) {
-		this.amount = amount;
+	public void setTotal(String total) {
+		this.total = total;
 	}
 }
